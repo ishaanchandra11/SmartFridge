@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+</head>
+<body>
+<div id="nav">
+    <h1>Recipe Recommender!</h1>
+</div>
+<div id="hero">
+    <div id="heroText">
+        <h1>Feeling Hungry?</h1>
+        <h3>Show us what you've got in your fridge, and we'll show you some recipes tailored to your ingredients, taken from Food Network!</h3>
+    </div>
+    <img src="static/fridge1.jpg">
+</div>
+<div id="about">
+    <h2>How It Works</h2>
+    <div id="info">
+        <div class="blurb" id="card1">
+            <img src="static/broccoli.png">
+            <div>
+                <h3>Step 1: Choose Some Ingredients</h3>
+                <p>Arrange on a table some ingredients that you'd like to put to use. Hint: Produce works best.</p>
+            </div>
+        </div>
+        <div class="blurb" id="card2">
+            <img src="static/photo.png">
+            <div>
+                <h3>Step 2: Upload Photos</h3>
+                <p>Take a few photos of the ingredients you have on hand and upload them below.</p>
+            </div>
+        </div>
+        <div class="blurb" id="card3">
+            <img src="static/pan.png">
+            <div>
+                <h3>Step 3: Get Recipe Recommendations</h3>
+                <p>Our system analyzes your ingredients and suggests some recipes involving them!</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="upload-container">
+    <h2>Click in the Box To Upload Your Pictures Below!</h2>
+    <form id="imageForm" action="/process-image" method="POST" enctype="multipart/form-data">
+        <div id="parameters">
+            <div>
+                <div class="amount">
+                    <p>Calories</p>
+                    <p><span id="output1">25</span></p>
+                </div>
+                <input type="range" id="slider1" name="calories" min="0" max="600" value="25">
+            </div>
+            <div>
+                <div class="amount">
+                    <p>Protein</p>
+                    <p><span id="output2">25</span></p>
+                </div>
+                <input type="range" id="slider2" name="protein" min="0" max="100" value="25">
+            </div>
+            <div>
+                <div class="amount">
+                    <p>Carbohydrates</p>
+                    <p><span id="output3">25</span></p>
+                </div>
+                <input type="range" id="slider3" name="carbohydrates" min="0" max="100" value="25">
+            </div>
+            <div>
+                <div class="amount">
+                    <p>Fats</p>
+                    <p><span id="output4">25</span></p>
+                </div>
+                <input type="range" id="slider4" name="fats" min="0" max="100" value="25">
+            </div>
+        </div>
+        <div id="formSubmission">
+            <input type="file" id="imageInput" name="image" multiple required>
+            <label for="imageInput" id="uploadButton">Choose Images</label>
+            <button type="submit">Get Recipes!</button>
+        </div>
+    </form>
+    <ul id="result"></ul>
+</div>
+
+<script>
+    document.getElementById("imageForm").addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const formData = new FormData();
+        const imageInput = document.getElementById("imageInput");
+
+        // Check if the user uploaded a file
+        if (imageInput.files.length === 0) {
+            alert("Please upload an image file.");
+            return;
+        }
+
+        // Add all selected image files to FormData
+        for (const file of imageInput.files) {
+            formData.append("images", file);
+        }
+
+        // Add slider values to FormData
+        formData.append("calories", document.getElementById("slider1").value);
+        formData.append("protein", document.getElementById("slider2").value);
+        formData.append("carbohydrates", document.getElementById("slider3").value);
+        formData.append("fats", document.getElementById("slider4").value);
+
+        // Send the data to the server
+        try {
+            const response = await fetch("/process-image", {
+                method: "POST",
+                body: formData
+            });
+
+            if (response.ok) {
+                window.location.href = "/results"; // Redirect to results page
+            } else {
+                alert("An error occurred while processing your request.");
+            }
+        } catch (error) {
+            console.error("An error occurred:", error);
+        }
+    });
+
+    // Get all sliders with the class "slider"
+    var sliders = document.querySelectorAll('input[type="range"]');
+
+    // Loop through each slider to set up the event listener
+    sliders.forEach(function(slider) {
+    var output = document.getElementById("output" + slider.id.slice(-1)); // Dynamically target the output based on the slider ID
+    output.innerHTML = slider.value; // Set the initial value of the output
+
+    slider.oninput = function() {
+        output.innerHTML = this.value; // Update the output whenever the slider changes
+    }
+    });
+    
+</script>
+</body>
+</html>

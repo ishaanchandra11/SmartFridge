@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommended Recipes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='results.css') }}">
+</head>
+<body>
+    <div id="nav">
+        <h1>Recipe Recommender!</h1>
+    </div>
+    <div id="content">
+        <h1>Recommended Recipes</h1>
+        
+        {% if recipes["Ingredients Available"] %}
+            <h2>Your Ingredients:</h2>
+            <h3 id="ingredients">{{ recipes["Ingredients Available"] }}</h3>
+        {% else %}
+            <p>No ingredients available.</p>
+        {% endif %}
+        
+        <h2>Recipe Suggestions For Your Ingredients!</h2>
+        <ul>
+            {% if recipes["Recommended Recipes"] %}
+                {% for recipeDetails in recipes["Recommended Recipes"] %}
+                    {% for recipe, details in recipeDetails.items() %}
+                        <li>
+                            <strong>{{ recipe }}</strong><br><br>
+                            Ingredients: {{ details.ingredients | join(", ") }}<br><br>
+                            Instructions: {{ details.instructions }}
+                        </li>
+                    {% endfor %}
+                {% endfor %}
+            {% else %}
+                <li>No recipes found.</li>
+            {% endif %}
+        </ul>
+    </div>
+    
+</body>
+</html>

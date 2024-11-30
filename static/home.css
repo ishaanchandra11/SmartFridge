@@ -1,0 +1,172 @@
+body {
+    background-image: url(background.jpg);
+    background-size: cover;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    accent-color: #96cb5c;
+}
+
+.upload-container {
+    padding: 5%;
+    margin: 5%;
+}
+
+#nav {
+    background-color: white;
+    padding: 2%;
+    margin: 0;
+    position: fixed;
+    width: 100%;
+}
+
+#nav > h1 {
+    margin: 0;
+    
+}
+
+#hero {
+    display: flex;
+    background-image: url(gradient6.png);
+    background-size: cover;
+    justify-content: space-between;
+    margin: 0;
+    padding-top: 5%;
+}
+
+#hero > img{
+    width: 40%;
+}
+
+#heroText {
+    margin: 15% 5%;
+    color: white;
+}
+
+#heroText > h1 {
+    font-size: 80px;
+    margin: 1%;
+}
+
+#heroText > h3 {
+    font-size: 30px;
+}
+
+#about {
+    background-color: white;
+    padding: 2%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#info {
+    display: flex;
+}
+
+.blurb {
+    background-color: #ef653b;
+    color: white;
+    margin: 5%;
+    width: 25%;
+    height: 275px;
+    padding: 3%;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 0px 5px 7px 0px rgba(0,0,0,0.4);
+}
+
+h2 {
+    font-size: 50px;
+    margin-bottom: 1%;
+}
+
+.blurb > img {
+    width: 80px;
+}
+
+#card1 {
+    background-color: #f07651;
+}
+
+#card2 {
+    background-color: #96cb5c;
+}
+
+#card3 {
+    background-color: #f16c6c;
+}
+
+#imageForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5%;
+}
+.upload-container > h2 {
+    margin: 1%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#parameters {
+    background-color: white;
+    padding: 4%;
+    border-radius: 5px;
+    font-size: 16.5px;
+    display: none;
+}
+
+#imageInput {
+    display: none;
+}
+
+.amount {
+    display: flex;
+    justify-content: space-between;
+}
+
+#formSubmission {
+    background-color:  #f07651;
+    width: 70%;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+#formSubmission > button {
+    position: relative;
+    top: 45px;
+    padding: 7px 28px;
+    border-radius: 5px;
+    font-size: 15px;
+    border: none;
+}
+
+#formSubmission > button:hover {
+    background-color: #96cb5c;
+}
+
+
+#uploadButton {
+    position: absolute;
+    padding: 11% 17%;
+    background-color: rgba(0, 0, 0, 0.2);
+    font-size: 30px;
+    border-radius: 5px;
+    border-style: dashed;
+    border-color: white;
+    color: white;
+}
+
+
+
+
